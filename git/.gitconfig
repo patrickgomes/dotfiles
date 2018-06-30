@@ -1,0 +1,9 @@
+[user]
+	email = gomes.patrick1@gmail.com
+	name = Patrick Gomes
+[diff]
+	tool = vimdiff
+[difftool]
+	prompt = false
+[alias]
+	d = difftool
