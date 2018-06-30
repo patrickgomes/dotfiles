@@ -202,7 +202,8 @@ bar {
 }
 
 # Setup wallpaper with feh
-exec_always --no-startup-id feh --bg-fill ~/Downloads/LOUSKYi-computer-science-wallpaper.jpg
+exec_always --no-startup-id feh --bg-fill ~/Pictures/thunderstorm_with_lightning_in_mountain-wallpaper-5120x2880.jpg
+
 
 # Start compton to enable windows effects 
 exec --no-startup-id compton --inactive-dim 0.275
