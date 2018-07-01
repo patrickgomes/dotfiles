@@ -116,17 +116,22 @@ if ! shopt -oq posix; then
   fi
 fi
 
-# aliases
-alias rebash='source ~/.bashrc; source ~/.profile '
+# Preferred programs
+export EDITOR=/usr/bin/vim
+export TERMINAL=/usr/local/bin/termite
+
+# Aliases
+alias zshconf='$EDITOR ~/.zshrc'
+
+alias bashconf='$EDITOR ~/.bashrc'
+alias src='source ~/.bashrc; source ~/.profile '
+
+alias i3conf='$EDITOR ~/.config/i3/config'
+alias i3blocks-conf='$EDITOR ~/.config/i3/i3blocks.conf'
+
 alias list='apt list '
 alias install='sudo apt install '
 alias search='apt search '
 alias purge='sudo apt purge '
 alias remove='sudo apt remove '
 alias autoremove='sudo apt autoremove '
-
-export EDITOR=vim
-export CDPATH=/etc:/media:/
-export TERMINAL=/usr/local/bin/termite
-export SCRIPT_DIR=~/.i3blocks-contrib
-export PATH=~/.scripts/:$PATH

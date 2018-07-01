@@ -10,7 +10,7 @@
 # Please see https://i3wm.org/docs/userguide.html for a complete reference!
 
 # Required for i3-gaps to work
-for_window [class="^.*"] border pixel 1
+for_window [class="^.*"] border pixel 2
 
 gaps inner 20
 gaps outer 10
@@ -37,7 +37,7 @@ floating_modifier $mod
 
 # Keybindings and float settings for frequently used apps
 bindsym $mod+Return exec "termite -d `xcwd`"
-bindsym $mod+b exec "qutebrowser"
+bindsym $mod+b exec "qutebrowser -R"
 bindsym $mod+n exec "nautilus -w --no-desktop `xcwd`"
 bindsym $mod+Dollar exec "termite --name ranger -e ranger -d `xcwd`"
 for_window [class="Nautilus"] floating enable
@@ -102,16 +102,16 @@ bindsym $mod+p focus parent
 bindsym $mod+c focus child
 
 # workspace labels
-set $ws1 "1"
-set $ws2 "2"
-set $ws3 "3"
-set $ws4 "4"
-set $ws5 "5"
-set $ws6 "6"
-set $ws7 "7:  Email"
-set $ws8 "8:  Chat"
-set $ws9 "9:  Browsing"
-set $ws10 "10:  Music"
+set $ws1 "[1]"
+set $ws2 "[2]"
+set $ws3 "[3]"
+set $ws4 "[4]"
+set $ws5 "[5]"
+set $ws6 "[6]"
+set $ws7 "[7]  "
+set $ws8 "[8]  "
+set $ws9 "[9]  "
+set $ws10 "[10] "
 
 # switch to workspace
 bindsym $mod+1 workspace $ws1
@@ -148,10 +148,6 @@ bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcu
 mode "resize" {
         # These bindings trigger as soon as you enter the resize mode
 
-        # Pressing left will shrink the window’s width.
-        # Pressing right will grow the window’s width.
-        # Pressing up will shrink the window’s height.
-        # Pressing down will grow the window’s height.
         bindsym h resize shrink width 10 px or 10 ppt
         bindsym j resize grow height 10 px or 10 ppt
         bindsym k resize shrink height 10 px or 10 ppt
@@ -170,20 +166,32 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
-set $bg-color 	         #2f342f
-set $inactive-bg-color   #2f343f
-set $text-color          #f3f4f5
-set $inactive-text-color #676E7D
-set $urgent-bg-color #E53935
+# power management 
+set $locker i3lock-fancy && sleep 1
+set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
 
-# Window colors
-#                       border          	background         	text                 	indicator
-client.focused          $bg-color		$bg-color          	$text-color          	#00ff00
-client.unfocused        $inactive-bg-color 	$inactive-bg-color 	$inactive-text-color 	#00ff00
-client.focused_inactive $inactive-bg-color 	$inactive-bg-color 	$inactive-text-color 	#00ff00
-client.urgent 		$urgent-bg-color 	$urgent-bg-color 	$text-color 		#00ff00
+mode "$mode_system" {
+    bindsym l exec --no-startup-id $locker, mode "default"
+    bindsym e exec --no-startup-id i3-msg exit, mode "default"
+    bindsym s exec --no-startup-id $locker && systemctl suspend, mode "default"
+    bindsym h exec --no-startup-id $locker && systemctl hibernate, mode "default"
+    bindsym r exec --no-startup-id systemctl reboot, mode "default"
+    bindsym Shift+s exec --no-startup-id systemctl poweroff -i, mode "default"  
 
-# Start i3blocks to display a workspace bar
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+bindsym F1 mode "$mode_system"
+
+# Status bar 
+set $bg-color 	        	#2f342f
+set $inactive-bg-color   	#2f343f
+set $text-color          	#f3f4f5
+set $inactive-text-color 	#676E7D
+set $urgent-bg-color		#E53935
+
 bar {
 	status_command i3blocks -c ~/.config/i3/i3blocks.conf
 	height 18
@@ -201,12 +209,11 @@ bar {
 	}
 }
 
-# Setup wallpaper with feh
+# Setup wallpaper
 exec_always --no-startup-id feh --bg-fill ~/Pictures/thunderstorm_with_lightning_in_mountain-wallpaper-5120x2880.jpg
 
-
 # Start compton to enable windows effects 
-exec --no-startup-id compton --inactive-dim 0.275
+exec --no-startup-id compton --inactive-dim 0.175
 
 # Scratchpad setup
 exec --no-startup-id termite --name scratchpad-terminal
@@ -215,24 +222,9 @@ for_window [instance="scratchpad-terminal"] move scratchpad
 exec --no-startup-id termite --name scratchpad-ranger -d ~ -e ranger
 for_window [instance="scratchpad-ranger"] move scratchpad
 
-
 bindsym $mod+minus move scratchpad 
 bindsym $mod+Shift+Return [instance="scratchpad-terminal"] scratchpad show
 bindsym $mod+Shift+dollar [instance="scratchpad-ranger"] scratchpad show
 bindsym $mod+Shift+n [class="Nautilus"] scratchpad show
 bindsym $mod+Shift+b [class="qutebrowser"] scratchpad show
 bindsym $mod+Shift+minus scratchpad show
-
-# Screen lock
-bindsym $mod+Shift+x exec --no-startup-id i3lock-fancy
-
-# Pulse Audio Controls
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-link-volume 0 +5%
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-link-volume 0 -5%
-bindsym XF86AudioMute exec --no-startup-id pactl set-link-mute 0 toggle 
-
-# Media player controls
-bindsym XF86AudioPlay exec --no-startup-id playerctl play
-bindsym XF86AudioPause exec --no-startup-id playerctl pause
-bindsym XF86AudioPrev exec --no-startup-id  playerctl previous
-bindsym XF86AudioNext exec --no-startup-id  playerctl next
