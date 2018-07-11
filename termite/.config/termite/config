@@ -22,7 +22,7 @@ browser = chromium
 foreground      = #e6e1dc
 foreground_bold = #e6e1dc
 cursor          = #e6e1dc
-background      = rgba(43, 43, 43, 0.60)
+background      = rgba(43, 43, 43, 0.70)
 
 # black
 color0  = #2b2b2b
