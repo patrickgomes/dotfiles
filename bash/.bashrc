@@ -121,13 +121,12 @@ export EDITOR=/usr/bin/vim
 export TERMINAL=/usr/local/bin/termite
 
 # Aliases
-alias zshconf='$EDITOR ~/.zshrc'
+alias zshconfig='$EDITOR ~/.zshrc'
 
-alias bashconf='$EDITOR ~/.bashrc'
+alias bashconfig='$EDITOR ~/.bashrc'
 alias src='source ~/.bashrc; source ~/.profile '
 
-alias i3conf='$EDITOR ~/.config/i3/config'
-alias i3blocks-conf='$EDITOR ~/.config/i3/i3blocks.conf'
+alias i3config='$EDITOR ~/.config/i3/config'
 
 alias list='apt list '
 alias install='sudo apt install '
@@ -135,3 +134,4 @@ alias search='apt search '
 alias purge='sudo apt purge '
 alias remove='sudo apt remove '
 alias autoremove='sudo apt autoremove '
+alias update='sudo apt update '
