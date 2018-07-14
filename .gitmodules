@@ -1,0 +1,3 @@
+[submodule "sources/i3-gaps"]
+	path = sources/i3-gaps
+	url = https://www.github.com/Airblader/i3
