@@ -104,6 +104,7 @@ alias remove='sudo apt remove '
 alias autoremove='sudo apt autoremove '
 alias update='sudo apt update '
 
+alias q='exit'
 
 # Options
 setopt sh_word_split

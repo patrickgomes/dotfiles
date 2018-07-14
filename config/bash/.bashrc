@@ -135,3 +135,5 @@ alias purge='sudo apt purge '
 alias remove='sudo apt remove '
 alias autoremove='sudo apt autoremove '
 alias update='sudo apt update '
+
+alias q='exit'

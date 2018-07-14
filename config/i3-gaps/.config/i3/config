@@ -220,9 +220,7 @@ bindsym F1 mode "$mode_system"
 
 
 #############################################
-#											#
-#			Startup Applications			#
-#											#
+			Startup Applications			
 #############################################
 
 # Setup wallpaper

@@ -23,8 +23,11 @@ colorscheme base16-railscasts
 highlight CursorLine cterm=None ctermbg=55 ctermfg=None
 autocmd InsertEnter * set cursorline 
 autocmd InsertLeave * set nocursorline 
-inoremap <c-c> <c-c>:set nocursorline<cr>
-nnoremap <c-h> :noh<cr>
+imap <c-c> <c-c>:set nocursorline<cr>
+nmap <c-h> :noh<cr>
 
 hi clear SpellBad
 hi SpellBad cterm=underline ctermbg=None ctermfg=red
+
+" Save and execute script
+nmap <F2> :w<cr>:! bash %<cr>
