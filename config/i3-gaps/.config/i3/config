@@ -12,8 +12,8 @@
 # Required for i3-gaps to work
 for_window [class="^.*"] border pixel 2
 
-gaps inner 10
-gaps outer 2
+gaps inner 20
+gaps outer 5
 
 set $mod Mod4
 
@@ -26,7 +26,7 @@ set $mod Mod4
 font pango:Ubuntu Monospace 11, FontAwesome 11 
 
 # Before i3 v4.8, we used to recommend this one as the default:
-# font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
+# font -misc-fixed-medium-r-normal--13-1-75-75-C-70-iso10646-1
 # The font above is very space-efficient, that is, it looks good, sharp and
 # clear in small sizes. However, its unicode glyph coverage is limited, the old
 # X core fonts rendering does not support right-to-left and this being a bitmap
@@ -100,7 +100,7 @@ bindsym $mod+p focus parent
 bindsym $mod+c focus child
 
 # class                 border  backgr. text    indicator child_border
-client.focused          #c5c8c6 #c5c8c6 #ffffff #8c9440   #c5c8c6
+client.focused          #c5c8c6 #c5c8c6 #ffffff #3e6ca2   #c5c8c6
 client.focused_inactive #333333 #5f676a #ffffff #484e50   #5f676a
 client.unfocused        #333333 #222222 #888888 #292d2e   #222222
 client.urgent           #2f343a #900000 #ffffff #900000   #900000
@@ -219,12 +219,10 @@ mode "$mode_system" {
 bindsym F1 mode "$mode_system"
 
 
-#############################################
-			Startup Applications			
-#############################################
+	### Startup Applications ###
 
 # Setup wallpaper
-exec_always --no-startup-id feh --bg-fill ~/Pictures/thunderstorm_with_lightning_in_mountain-wallpaper-5120x2880.jpg
+exec_always --no-startup-id feh --bg-fill ~/Pictures/light_sky_stars_background_85555_2560x1440.jpg
 
 # Start compton to enable windows effects 
 exec_always --no-startup-id compton

@@ -19,7 +19,7 @@ set ignorecase
 set infercase
 set omnifunc=syntaxcomplete#Complete
 
-colorscheme base16-railscasts
+colorscheme darkblue
 highlight CursorLine cterm=None ctermbg=55 ctermfg=None
 autocmd InsertEnter * set cursorline 
 autocmd InsertLeave * set nocursorline 
@@ -31,3 +31,5 @@ hi SpellBad cterm=underline ctermbg=None ctermfg=red
 
 " Save and execute script
 nmap <F2> :w<cr>:! bash %<cr>
+" Save and debug script
+nmap <F3> :w<cr>:! bash -x %<cr>
