@@ -83,6 +83,9 @@ source $ZSH/oh-my-zsh.sh
 # For a full list of active aliases, run `alias`.
 #
 
+# Libraries
+export LIBRARY_PATH="/usr/include/gtk-3.0:$LIBRARY_PATH"
+
 # Preferred programs
 export EDITOR=/usr/bin/vim
 export TERMINAL=/usr/local/bin/termite

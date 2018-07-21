@@ -26,6 +26,7 @@ readonly USER_HOME=$(echo ~)
 # Dependencies
 readonly DEV_TOOLS="git stow make wget cmake autoreconf"
 readonly FONTS="fonts-font-awesome fonts-powerline"
+readonly VTE_NG_BUILD_DEPS="g++ libgtk-3-dev gtk-doc-tools gnutls-bin valac intltool libpcre2-dev libglib3.0-cil-dev libgnutls28-dev libgirepository1.0-dev libxml2-utils gperf"
 readonly I3_BUILD_DEPS="libxcb1-dev libxcb-keysyms1-dev libpango1.0-dev libxcb-util0-dev libxcb-icccm4-dev libyajl-dev libstartup-notification0-dev libxcb-randr0-dev libev-dev libxcb-cursor-dev libxcb-xinerama0-dev libxcb-xkb-dev libxkbcommon-dev libxkbcommon-x11-dev autoconf libxcb-xrm-dev"
 readonly I3_RUNTIME_DEPS="zsh vim exuberant-ctags ranger qutebrowser htop i3lock-fancy feh compton suckless-tools"
 
@@ -34,7 +35,11 @@ readonly BLUE='\e[1;34m'
 readonly RED='\e[1;31m'
 readonly WHITE='\e[0;37m'
 
-# ------------------------ FUNCTIONS  -------------------------
+# -------------------------- ALIASES ----------------------------
+alias pushd=>/dev/null pushd
+alias popd=>/dev/null popd
+
+# ------------------------ FUNCTIONS --------------------------
 
 # print_usage -- TODO: Work in progress
 function print_usage()
@@ -124,17 +129,27 @@ function install_configs()
 	return $? 
 }
 
+# install_termite -- Builds the termite terminal-emulator (including dependencies) and installs it.
+# 		     See https://github.com/Corwind/
 function install_termite()
 {
 	local ret_val
 
-	pushd "$SOURCE_DIR/termite" && make
+	pushd "$SOURCE_DIR/vte-ng"
+	sudo apt install $VTE_NG_BUILD_DEPS
+	./autogen.sh && make && sudo make install
+
+	cd "$SOURCE_DIR/termite" && make && sudo make install
+	sudo ldconfig 
+	sudo mkdir -p /lib/terminfo/x; sudo ln -s /usr/local/share/terminfo/x/xterm-termite /lib/terminfo/x/xterm-termite
+	sudo update-alternatives --install /usr/bin/x-terminal-emulator x-terminal-emulator /usr/local/bin/termite 60
+
 	cmd_avl termite
 	ret_val=$?
-	popd
 	
-	return $ret_val
+	popd && return $ret_val
 }
+
 # install_i3 -- Installs i3-gaps build and runtime dependencies and subsequently builds the i3-gaps window manager project
 function install_i3() 
 {
@@ -152,7 +167,7 @@ function install_i3()
 		# The prefix and sysconfdir are, obviously, dependent on the distribution.
 		../configure --prefix=/usr --sysconfdir=/etc --disable-sanitizers
 		make
-		#sudo make install
+		sudo make install
 
 		cmd_avl i3
 		ret_val=$?
@@ -191,8 +206,8 @@ function main()
 
 		# Start critical section
 		install_termite
-		install_i3
-		bkp_old_configs
+		# install_i3
+		# bkp_old_configs
 		# End critical section
 
 		rm -fr "$TMP_DIR"
