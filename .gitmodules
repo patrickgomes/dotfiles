@@ -4,3 +4,6 @@
 [submodule "sources/termite"]
 	path = sources/termite
 	url = https://github.com/thestinger/termite.git
+[submodule "sources/vte-ng"]
+	path = sources/vte-ng
+	url = https://github.com/thestinger/vte-ng.git
