@@ -136,7 +136,7 @@ function install_termite()
 	local ret_val
 
 	pushd "$SOURCE_DIR/vte-ng"
-	sudo apt install $VTE_NG_BUILD_DEPS
+	sudo apt install -y $VTE_NG_BUILD_DEPS
 	./autogen.sh && make && sudo make install
 
 	cd "$SOURCE_DIR/termite" && make && sudo make install
@@ -155,7 +155,7 @@ function install_i3()
 {
 		local ret_val
 
-		sudo apt install $I3_BUILD_DEPS $I3_RUNTIME_DEPS
+		sudo apt install -y $I3_BUILD_DEPS $I3_RUNTIME_DEPS
 
 		pushd "$SOURCE_DIR/i3-gaps"
 		# compile & install
