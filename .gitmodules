@@ -7,3 +7,6 @@
 [submodule "sources/vte-ng"]
 	path = sources/vte-ng
 	url = https://github.com/thestinger/vte-ng.git
+[submodule "sources/polybar"]
+	path = sources/polybar
+	url = https://github.com/jaagr/polybar.git

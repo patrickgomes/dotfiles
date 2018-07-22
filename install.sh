@@ -29,6 +29,7 @@ readonly FONTS="fonts-font-awesome fonts-powerline"
 readonly VTE_NG_BUILD_DEPS="g++ libgtk-3-dev gtk-doc-tools gnutls-bin valac intltool libpcre2-dev libglib3.0-cil-dev libgnutls28-dev libgirepository1.0-dev libxml2-utils gperf"
 readonly I3_BUILD_DEPS="libxcb1-dev libxcb-keysyms1-dev libpango1.0-dev libxcb-util0-dev libxcb-icccm4-dev libyajl-dev libstartup-notification0-dev libxcb-randr0-dev libev-dev libxcb-cursor-dev libxcb-xinerama0-dev libxcb-xkb-dev libxkbcommon-dev libxkbcommon-x11-dev autoconf libxcb-xrm-dev"
 readonly I3_RUNTIME_DEPS="zsh vim exuberant-ctags ranger qutebrowser htop i3lock-fancy feh compton suckless-tools"
+readonly POLYBAR_BUILD_DEPS="cmake cmake-data pkg-config libcairo2-dev libxcb1-dev libxcb-util0-dev libxcb-randr0-dev python-xcbgen xcb-proto libxcb-image0-dev libxcb-ewmh-dev libxcb-icccm4-dev libxcb-xkb-dev libxcb-xrm-dev libxcb-cursor-dev libasound2-dev libpulse-dev libjsoncpp-dev libmpdclient-dev libcurl4-openssl-dev libiw-dev libnl-3-dev"
 
 # Terminal colors
 readonly BLUE='\e[1;34m'
@@ -38,6 +39,7 @@ readonly WHITE='\e[0;37m'
 # -------------------------- ALIASES ----------------------------
 alias pushd=>/dev/null pushd
 alias popd=>/dev/null popd
+alias install=sudo apt install -yqq
 
 # ------------------------ FUNCTIONS --------------------------
 
@@ -136,7 +138,7 @@ function install_termite()
 	local ret_val
 
 	pushd "$SOURCE_DIR/vte-ng"
-	sudo apt install -y $VTE_NG_BUILD_DEPS
+	install -y $VTE_NG_BUILD_DEPS
 	./autogen.sh && make && sudo make install
 
 	cd "$SOURCE_DIR/termite" && make && sudo make install
@@ -155,7 +157,7 @@ function install_i3()
 {
 		local ret_val
 
-		sudo apt install -y $I3_BUILD_DEPS $I3_RUNTIME_DEPS
+		install -y $I3_BUILD_DEPS $I3_RUNTIME_DEPS
 
 		pushd "$SOURCE_DIR/i3-gaps"
 		# compile & install
@@ -174,6 +176,25 @@ function install_i3()
 		popd
 
 		return $ret_val
+}
+
+function install_polybar()
+{
+	local ret_val
+
+	install -y $POLYBAR_BUILD_DEPS
+
+	pushd "$SOURCE_DIR/polybar"
+	mkdir -p build
+	cd build
+	cmake ..
+	sudo make install
+
+	cmd_avl polybar
+	ret_val=$?
+	popd
+
+	return $ret_val
 }
 
 # ------------------------ MAIN -------------------------
@@ -205,7 +226,8 @@ function main()
 		trap 'rm -fr "$TMP_DIR"; exit $?' INT TERM EXIT
 
 		# Start critical section
-		install_termite
+		install_polybar
+		# install_termite
 		# install_i3
 		# bkp_old_configs
 		# End critical section
