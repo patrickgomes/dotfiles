@@ -37,9 +37,12 @@ readonly RED='\e[1;31m'
 readonly WHITE='\e[0;37m'
 
 # -------------------------- ALIASES ----------------------------
-alias pushd=>/dev/null pushd
-alias popd=>/dev/null popd
-alias install=sudo apt install -yqq
+
+shopt -s expand_aliases
+
+alias pushd='>/dev/null pushd '
+alias popd='>/dev/null popd '
+alias install='sudo apt install -yqq '
 
 # ------------------------ FUNCTIONS --------------------------
 
@@ -138,7 +141,7 @@ function install_termite()
 	local ret_val
 
 	pushd "$SOURCE_DIR/vte-ng"
-	install -y $VTE_NG_BUILD_DEPS
+	install $VTE_NG_BUILD_DEPS
 	./autogen.sh && make && sudo make install
 
 	cd "$SOURCE_DIR/termite" && make && sudo make install
@@ -157,7 +160,7 @@ function install_i3()
 {
 		local ret_val
 
-		install -y $I3_BUILD_DEPS $I3_RUNTIME_DEPS
+		install $I3_BUILD_DEPS $I3_RUNTIME_DEPS
 
 		pushd "$SOURCE_DIR/i3-gaps"
 		# compile & install
@@ -182,11 +185,14 @@ function install_polybar()
 {
 	local ret_val
 
-	install -y $POLYBAR_BUILD_DEPS
+	install $POLYBAR_BUILD_DEPS
 
-	pushd "$SOURCE_DIR/polybar"
-	mkdir -p build
-	cd build
+	pushd "$SOURCE_DIR/polybar/lib/xpp/"
+	git checkout master
+	rm -f include/xpp/proto/*
+
+	mkdir -p "$SOURCE_DIR/polybar/build"
+	cd "$SOURCE_DIR/polybar/build"
 	cmake ..
 	sudo make install
 
