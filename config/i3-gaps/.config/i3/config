@@ -23,7 +23,7 @@ set $mod Mod4
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
 # font pango:DejaVu Sans Mono 8
 
-font pango:Ubuntu Monospace 11, FontAwesome 11 
+font pango:Ubuntu Monospace 12, FontAwesome 12 
 
 # Before i3 v4.8, we used to recommend this one as the default:
 # font -misc-fixed-medium-r-normal--13-1-75-75-C-70-iso10646-1
@@ -36,10 +36,10 @@ font pango:Ubuntu Monospace 11, FontAwesome 11
 floating_modifier $mod
 
 # Keybindings and float settings for frequently used apps
-bindsym $mod+Return exec "termite -d `xcwd`"
+bindsym $mod+Return exec "termite -d $(xcwd)"
 bindsym $mod+b exec "qutebrowser -R"
-bindsym $mod+n exec "nautilus -w --no-desktop `xcwd`"
-bindsym $mod+dollar exec "termite --name ranger -e ranger -d `xcwd`"
+bindsym $mod+n exec "nautilus -w --no-desktop $(xcwd)"
+bindsym $mod+dollar exec "termite --name ranger -e ranger -d $(xcwd)"
 for_window [class="Nautilus"] floating enable
 
 # kill focused window
