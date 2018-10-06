@@ -33,3 +33,5 @@ hi SpellBad cterm=underline ctermbg=None ctermfg=red
 nmap <F2> :w<cr>:! bash %<cr>
 " Save and debug script
 nmap <F3> :w<cr>:! bash -x %<cr>
+
+execute pathogen#infect()
