@@ -35,3 +35,6 @@ nmap <F2> :w<cr>:! bash %<cr>
 nmap <F3> :w<cr>:! bash -x %<cr>
 
 execute pathogen#infect()
+
+" For clever completion with the :find command
+set path+=**
