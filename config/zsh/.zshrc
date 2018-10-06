@@ -111,3 +111,6 @@ alias q='exit'
 
 # Options
 setopt sh_word_split
+
+# FZF comletion
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
