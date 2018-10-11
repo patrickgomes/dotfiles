@@ -1,0 +1,3 @@
+--ignore-file=is:tags
+--ignore-directory=is:debug
+--ignore-directory=is:build
