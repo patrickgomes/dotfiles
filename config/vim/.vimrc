@@ -38,7 +38,7 @@ execute pathogen#infect()
 let mapleader = "!"
 
 " Find references to identifier under the cursor
-nnoremap <leader>r yiw:Ack <c-r>"!<cr>
+nnoremap <leader>r yiw:Ack <c-r>"<cr>
 
 " Save and execute script
 nmap <F2> :w<cr>:! bash %<cr>
