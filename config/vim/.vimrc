@@ -18,8 +18,7 @@ set infercase
 syntax on
 filetype plugin on
 
-colorscheme darkblue
-highlight CursorLine cterm=None ctermbg=55 ctermfg=None
+highlight CursorLine cterm=None ctermbg=2 ctermfg=None
 autocmd InsertEnter * set cursorline 
 autocmd InsertLeave * set nocursorline 
 imap <c-c> <c-c>:set nocursorline<cr>
