@@ -1,3 +1,5 @@
+export TERM="xterm-256color"
+
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
@@ -91,6 +93,7 @@ export EDITOR=/usr/bin/vim
 export TERMINAL=/usr/local/bin/termite
 
 # Aliases
+alias sudo='sudo '
 alias bashconfig='$EDITOR ~/.bashrc'
 
 alias zshconfig='$EDITOR ~/.zshrc'
@@ -104,3 +107,6 @@ setopt sh_word_split
 
 # FZF comletion
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# Powerlevel9k 
+#source /usr/share/zsh-theme-powerlevel9k/powerlevel9k.zsh-theme
