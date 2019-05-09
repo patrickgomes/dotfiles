@@ -18,14 +18,11 @@ set infercase
 syntax on
 filetype plugin on
 
-highlight CursorLine cterm=None ctermbg=2 ctermfg=None
-autocmd InsertEnter * set cursorline 
-autocmd InsertLeave * set nocursorline 
-imap <c-c> <c-c>:set nocursorline<cr>
-nmap <c-h> :noh<cr>
+" Always show powerlevel9k statusline
+set laststatus=2
 
+nmap <c-h> :noh<cr>
 hi clear SpellBad
-hi SpellBad cterm=underline ctermbg=None ctermfg=red
 
 " For clever completion with the :find command
 set path=/usr/include/**,./**
