@@ -11,6 +11,7 @@ set ruler
 set showcmd
 set incsearch
 set hlsearch
+set mouse=""
 
 set ignorecase
 set infercase

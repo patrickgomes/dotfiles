@@ -9,7 +9,7 @@ export ZSH="/home/patrick/.oh-my-zsh"
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="agnoster"
+ZSH_THEME="afowler"
 
 # Set list of themes to load
 # Setting this variable when ZSH_THEME=random
@@ -85,20 +85,14 @@ source $ZSH/oh-my-zsh.sh
 # For a full list of active aliases, run `alias`.
 #
 
+# Set more restrictive umask
+umask 027
+
 # Libraries
 export LIBRARY_PATH="/usr/include/gtk-3.0:$LIBRARY_PATH"
 
 # Preferred programs
 export EDITOR=/usr/bin/vim
-export TERMINAL=/usr/local/bin/termite
-
-# Aliases
-alias sudo='sudo '
-alias bashconfig='$EDITOR ~/.bashrc'
-
-alias zshconfig='$EDITOR ~/.zshrc'
-alias ohmyzsh='$EDITOR ~/.oh-my-zsh'
-alias src='source ~/.zshrc'
 
 alias hex="printf '%x\n' "
 
@@ -107,6 +101,3 @@ setopt sh_word_split
 
 # FZF comletion
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-# Powerlevel9k 
-#source /usr/share/zsh-theme-powerlevel9k/powerlevel9k.zsh-theme
